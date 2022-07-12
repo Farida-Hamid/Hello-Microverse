@@ -25,7 +25,10 @@ class TodosList extends React.Component {
       <div>
         <ul>
           {this.state.todos.map(todo => (
-            <li key={todo.id}>{todo.title} </li>
+            <li key={todo.id}>
+              <input type="checkbox" checked={this.props.todos.completed}/>
+              {todo.title}
+            </li>
           ))}
         </ul>
       </div>
