@@ -20,13 +20,17 @@ class TodosList extends React.Component {
     ]
    };
 
+   handleChange = () => {
+    console.log("clicked");
+  };
+
   render() {
     return (
       <div>
         <ul>
           {this.state.todos.map(todo => (
             <li key={todo.id}>
-              <input type="checkbox" checked={this.props.todos.completed}/>
+              <input type="checkbox" onChange={this.handleChange} checked={this.state.todos.completed}/>
               {todo.title}
             </li>
           ))}
