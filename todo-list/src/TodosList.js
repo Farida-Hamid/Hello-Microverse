@@ -20,8 +20,15 @@ class TodosList extends React.Component {
     ]
    };
 
-   handleChange = () => {
-    console.log("clicked =>",);
+   handleCheck = (id) => {
+    this.state.todos.map(task => {
+      console.log("looking for ", id, 'found', task.id);
+      if(task.id === id) {
+        console.log('found it', task.completed);
+        task.completed = !task.completed;
+        console.log('changed it', task.completed);
+      }
+    })
   };
 
   render() {
@@ -30,7 +37,7 @@ class TodosList extends React.Component {
         <ul>
           {this.state.todos.map(todo => (
             <li key={todo.id}>
-              <input type="checkbox" onChange={this.handleChange} checked={todo.completed}/>
+              <input type="checkbox" onChange={this.handleCheck(todo.id)} defaultChecked={todo.completed}/>
               {todo.title}
             </li>
           ))}
