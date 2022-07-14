@@ -1,11 +1,13 @@
-import React from "react"
+import React from "react";
+import TodoContainer from "./TodoContainer";
+
 class TodosList extends React.Component {
   state = {
     todos: [
       {
         id: 1,
         title: "Setup development environment",
-        completed: true
+        completed: false
       },
       {
         id: 2,
@@ -20,30 +22,23 @@ class TodosList extends React.Component {
     ]
    };
 
-   handleCheck = (id) => {
-    this.state.todos.map(task => {
+  handleCheck = (id) => {
+    this.setState({ todos: this.state.todos.map(task => {
       console.log("looking for ", id, 'found', task.id);
       if(task.id === id) {
-        console.log('found it', task.completed);
-        task.completed = !task.completed;
-        console.log('changed it', task.completed);
+        task.completed = !task.completed
       }
-    })
-  };
-
-  render() {
-    return (
-      <div>
-        <ul>
-          {this.state.todos.map(todo => (
-            <li key={todo.id}>
-              <input type="checkbox" onChange={this.handleCheck(todo.id)} defaultChecked={todo.completed}/>
-              {todo.title}
-            </li>
-          ))}
-        </ul>
-      </div>
-    )
+      console.log('changed it', task.completed);
+      return task
+    }) })
   }
+
+render() {
+  return(
+    <div className="App">
+      <TodoContainer todos={this.state.todos} handleCheck = {this.handleCheck}/>
+    </div>
+  )
+}
 }
 export default TodosList
